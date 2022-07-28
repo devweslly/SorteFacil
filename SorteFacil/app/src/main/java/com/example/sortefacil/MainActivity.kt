@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.sortefacil.databinding.ActivityMainBinding
+import java.util.*
 
 private lateinit var binding: ActivityMainBinding
 
@@ -16,18 +17,18 @@ class MainActivity : AppCompatActivity() {
         binding.button.setOnClickListener {
             // Criando a lógica para sortear os números
             // Criando Collection Set
-            val numeros: MutableSet<Int> = mutableSetOf()
+            var numeros: MutableSet<Int> = mutableSetOf()
 
             // Adicionando numero random no Set numeros
-            for (i in 0..5) {
+            // É criado um Set de tamanho 7, mas só imprimimos 6 elementos
+            for (i in 0..6) {
 
-                // Todo pensar em melhorar a lógica para não rodar o random dentro do for
-                val random = (1..60).random()
+                var random = Random().nextInt(61)
 
-                if (numeros.contains(random)) {
-                    var num = (1..60).random()
-                    numeros.add(num)
-                } else {
+                if (numeros.contains(random) || random == 0) {
+                    random = (1..60).random()
+                    numeros.add(random)
+                } else if(random >= 1) {
                     numeros.add(random)
                 }
             }
